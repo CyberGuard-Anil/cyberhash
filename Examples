@@ -1,1 +1,9 @@
+Examples
+Create example files in the examples/ directory:
+
+md5_example.txt:
+0d107d09f5bbe40cade3de5c71e9e9b7
+
+sha256_example.txt:
+6dcd4ce23d88e2ee9568ba546c007c63b956a2e130cbb91a3403c14c5269a6d0
 
