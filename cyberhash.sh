@@ -56,11 +56,12 @@ echo "Wordlist: $WORDLIST"
 echo ""
 
 while IFS= read -r password; do
-    # Hash the current word
+    # Hash the current word and remove any trailing output
     hash=$(echo -n "$password" | $HASH_COMMAND | awk '{print $1}')
 
     echo "Trying password: $password -> Hash: $hash"
 
+    # Compare the computed hash to the target hash
     if [ "$hash" == "$HASH_TO_CRACK" ]; then
         echo ""
         echo "Password found: $password"
