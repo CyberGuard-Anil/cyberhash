@@ -28,11 +28,5 @@ To install these utilities on Ubuntu:
 ```bash
 sudo apt-get install coreutils
 
-## **Usage**
 
-### **1. Clone the Repository**
-First, clone the CyberHash repository to your local machine:
-```bash
-git clone https://github.com/yourusername/cyberhash.git
-cd cyberhash
 
