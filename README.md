@@ -20,11 +20,10 @@
 
 ### **1. Clone the Repository**
 First, clone the CyberHash repository to your local machine:
-To install these utilities on Ubuntu:
-
+```bash
 git clone https://github.com/CyberGuard-Anil/cyberhash.git
 cd cyberhash  
-
+```
 ### Prerequisites
 - **Shell Environment**: Tested on Linux and macOS.
 - **Hash Utilities**: Ensure the following utilities are installed:
