@@ -12,7 +12,7 @@
   - SHA-256
   - SHA-512
 - **Custom Wordlist Support**: Allows users to provide their own wordlist file.
-- **Extensible Design**: Can be expanded to support additional hash types or features.
+- **Extensible Design**: Can be expanded to support additional hash types or features!
 
 ---
 
