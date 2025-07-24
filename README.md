@@ -1,4 +1,3 @@
-
 ```markdown
 # 🔐 CyberHash – Modular Automated Hash Cracker (Bash Edition)
 
@@ -164,4 +163,5 @@ Want to add a new hash type, improve performance, or make it prettier?
 
 → Fork, add changes, and send a Pull Request! 💡
 
----
+```
+
