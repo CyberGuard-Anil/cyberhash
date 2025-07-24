@@ -14,11 +14,11 @@
 
 cyberhash/
 ├── core/
-│   ├── crack\_engine.sh
-│   ├── hash\_detect.sh
+│   ├── crack_engine.sh
+│   ├── hash_detect.sh
 │   └── utils.sh
 ├── plugins/
-│   └── hash\_bcrypt.sh
+│   └── hash_bcrypt.sh
 ├── wordlists/
 │   └── rockyou.txt (not included, see below)
 ├── results/
