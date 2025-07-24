@@ -1,160 +1,167 @@
-# 🔐 CyberHash – Advanced Hash Cracking Tool (Bash Edition)
 
-> 💣 Crack password hashes like a pro using Bash!  
-CyberHash automatically detects the hash type and compares it with your wordlist — no manual guesswork required.
+```markdown
+# 🔐 CyberHash – Modular Automated Hash Cracker (Bash Edition)
 
-![bash](https://img.shields.io/badge/Bash-Script-blue?style=for-the-badge)
-![hash](https://img.shields.io/badge/Hash%20Cracking-Automated-red?style=for-the-badge)
-![status](https://img.shields.io/badge/Project-Active-brightgreen?style=for-the-badge)
+> **Educational, modular, and extensible password hash cracker** for Linux/macOS written entirely in Bash.
+
+![Bash](https://img.shields.io/badge/Bash-Advanced-blue?style=for-the-badge)
+![Hash](https://img.shields.io/badge/Hash%20Types-Multi-green?style=for-the-badge)
+![Status](https://img.shields.io/badge/Project-Active-brightgreen?style=for-the-badge)
+
+---
+
+## 📁 Project Structure
+
+```
+
+cyberhash/
+├── core/
+│   ├── crack\_engine.sh
+│   ├── hash\_detect.sh
+│   └── utils.sh
+├── plugins/
+│   └── hash\_bcrypt.sh
+├── wordlists/
+│   └── rockyou.txt (not included, see below)
+├── results/
+│   └── logs.txt
+├── cyberhash.sh
+├── LICENSE
+└── README.md
+
+````
 
 ---
 
 ## ⚙️ Features
 
-- 🧠 **Automatic Hash Type Detection**  
-- 🔐 Supports:  
-  - MD5  
-  - SHA-1  
-  - SHA-256  
-  - SHA-512  
-- 📁 **Custom Wordlist Support**  
-- 🔄 Extensible Script Design  
-- 💻 Works on all major Linux/macOS systems
+- 🧠 Automatic hash type detection (length + regex pattern-based)
+- 🔌 Plugin-based architecture (easily add new hash types)
+- 🔐 Supports: MD5, SHA-1, SHA-256, SHA-512, **bcrypt** (via plugin)
+- 📄 Custom wordlist support
+- 🔄 Fully modular & maintainable
+- 💻 Compatible with Linux and macOS
 
 ---
 
-## 🖥️ Demo
+## 🚀 Quick Start
 
-```bash
-$ ./cyberhash.sh -h fcea920f7412b5da7be0cf42b8c93759 -w wordlist.txt
-
-[+] Detected Hash Type: MD5
-[+] Cracking...
-[✔] Hash matched! Password: password1
-````
-
----
-
-## 🚀 Installation
-
-### 🔽 1. Clone the Repository
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/CyberGuard-Anil/cyberhash.git
 cd cyberhash
-chmod +x cyberhash.sh
-```
+chmod +x cyberhash.sh core/*.sh plugins/*.sh
+````
 
----
+### 2. Download a wordlist
 
-## 📦 Prerequisites
-
-Ensure the following utilities are installed:
-
-* `md5sum`
-* `sha1sum`
-* `sha256sum`
-* `sha512sum`
-
-### 📥 Install on Ubuntu/Debian:
+We recommend `rockyou.txt`:
 
 ```bash
-sudo apt-get update
-sudo apt-get install coreutils
+mkdir -p wordlists
+wget -O wordlists/rockyou.txt https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt
 ```
 
----
-
-## 🔧 Usage
+### 3. Run the cracker
 
 ```bash
-./cyberhash.sh -h <hash_value> -w <wordlist.txt>
+./cyberhash.sh -h <hash_value> -w wordlists/rockyou.txt
 ```
 
-### 📌 Flags:
-
-* `-h`: Hash string to crack
-* `-w`: Path to the wordlist
-
-### ✅ Example:
+**Example (MD5 of "hello"):**
 
 ```bash
-./cyberhash.sh -h 5d41402abc4b2a76b9719d911017c592 -w rockyou.txt
+./cyberhash.sh -h 5d41402abc4b2a76b9719d911017c592 -w wordlists/rockyou.txt
 ```
 
 ---
 
-## 🧠 How It Works
+## 🔧 Prerequisites
 
-1. Script checks hash length and pattern
-2. Based on that, selects the hashing algorithm
-3. Iterates through the wordlist
-4. Hashes each word and compares with given hash
-5. Displays password if matched, else shows "not found"
+* **Bash** (version 4 or higher)
+* Core hash utilities: `md5sum`, `sha1sum`, `sha256sum`, `sha512sum`
+* For **bcrypt**:
 
----
-
-## 📁 File Structure
-
-```
-cyberhash/
-├── cyberhash.sh
-├── wordlist.txt (example)
-└── README.md
-```
+  ```bash
+  pip install bcrypt
+  ```
 
 ---
 
-## 📌 Sample Wordlist
-
-Use your own or download popular ones like:
-
-* `/usr/share/wordlists/rockyou.txt`
-* `SecLists/Passwords`
-
----
-
-## 💡 Educational Use Only
-
-This script is built to teach:
-
-* Hash cracking logic using Bash
-* Conditional logic and looping
-* Working with CLI arguments & file handling
-
-Do NOT use it on unauthorized systems or data.
-
----
-
-## ❓ Troubleshooting
-
-**Command not found?**
-Make sure you’ve given executable permission:
+## 📚 Usage
 
 ```bash
-chmod +x cyberhash.sh
+./cyberhash.sh -h <hash_value> -w <wordlist_path>
 ```
 
-**Hash not detected?**
-Check if the hash is supported (MD5/SHA-1/SHA-256/SHA-512)
+### Flags:
 
-**No match found?**
-Try a larger or more relevant wordlist
+* `-h` → Hash value to crack
+* `-w` → Path to the wordlist file
+
+### Supported Hashes:
+
+* `md5`
+* `sha1`
+* `sha256`
+* `sha512`
+* `bcrypt` (via plugin)
+
+---
+
+## 🧩 Adding New Hash Plugins
+
+Want to add a new hash type (e.g., Argon2, NTLM)?
+
+* Create a new file in `plugins/` like `hash_argon2.sh`
+* Update `core/hash_detect.sh` to detect the new hash pattern
+
+A stub/example is provided to get started quickly.
+
+---
+
+## 📝 Logging
+
+Results and cracked passwords are stored in:
+
+```bash
+results/logs.txt
+```
+
+Or feel free to redirect output manually as per your needs.
+
+---
+
+## 🚫 About Wordlists
+
+Due to GitHub file size policies, `rockyou.txt` is **not included**.
+
+📥 You can manually download it here:
+[Download rockyou.txt](https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt)
+
+Or use your own custom wordlist!
+
+---
+
+## 🛡️ Legal & Ethical Notice
+
+> This tool is meant **strictly for educational purposes** and authorized testing.
+> **Never use against systems or networks without proper permission.**
+> Misuse of this tool is your responsibility.
 
 ---
 
 ## 👨‍💻 Author
 
-Built with 🔐 by [Cyber Guard x Anil Yadav](https://github.com/CyberGuard-Anil)
-Part of the **Cybersecurity Bash Automation Toolkit**
+Made with ❤️ by [Cyber Guard x Anil Yadav](https://github.com/CyberGuard-Anil)
 
 ---
 
-## 📜 License
+## ✨ Contributions Welcome!
 
-MIT License — Open to use, learn, remix, and improve.
+Want to add a new hash type, improve performance, or make it prettier?
+
+→ Fork, add changes, and send a Pull Request! 💡
 
 ---
-
-> 🧠 Crack Intelligently | 💻 Automate Bruteforce | 🔒 Stay Ethical
-> **Happy Hacking, Stay Secure!**
