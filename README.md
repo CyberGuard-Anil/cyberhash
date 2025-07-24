@@ -1,4 +1,3 @@
-```markdown
 # 🔐 CyberHash – Modular Automated Hash Cracker (Bash Edition)
 
 > **Educational, modular, and extensible password hash cracker** for Linux/macOS written entirely in Bash.
